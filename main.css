@@ -642,7 +642,7 @@ a {
 }
 
 .message {
-  width: 500px;
+  width: auto;
   height: auto;
   margin: 0 auto;
   margin-top: 40px;
@@ -736,6 +736,14 @@ a {
   .card_title {
     font-size: 30px;
   }
+  .no_message,
+  .message {
+    width: 260px;
+  }
+  .no_print,
+  .message_print {
+    font-size: 12px;
+  }
 }
 
 @media (min-width: 375px) and (max-width: 800px) {
@@ -779,6 +787,14 @@ a {
 
   .card_title {
     font-size: 30px;
+  }
+  .no_message,
+  .message {
+    width: 260px;
+  }
+  .no_print,
+  .message_print {
+    font-size: 12px;
   }
 }
 
