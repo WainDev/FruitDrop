@@ -1,2 +1,2 @@
 # FruitDrop
-FruitDrop - Web App
+FruitDrop - Web App - https://waindev.github.io/FruitDrop/
